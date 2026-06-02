@@ -1,0 +1,42 @@
+# =================================================
+# WebDAV 远程备份与同步
+# =================================================
+WEBDAV_TITLE="WebDAV 远程备份与同步"
+WEBDAV_SERVER_URL="WebDAV 服务器地址："
+WEBDAV_USER="用户名："
+WEBDAV_PASS="密码："
+WEBDAV_ENABLE="自动同步开关："
+WEBDAV_UNSET="未设置"
+
+WEBDAV_MENU_1="编辑 WebDAV 服务器配置"
+WEBDAV_MENU_2="测试 WebDAV 连接"
+WEBDAV_MENU_3="上传备份 configs/ 目录到 WebDAV"
+WEBDAV_MENU_4="从 WebDAV 下载恢复 configs/ 目录"
+WEBDAV_MENU_5="上传 config.yaml 到 WebDAV"
+WEBDAV_MENU_6="从 WebDAV 下载恢复 config.yaml"
+WEBDAV_MENU_7="开启/关闭 自动定时备份"
+
+WEBDAV_INPUT_URL="请输入 WebDAV 服务器地址"
+WEBDAV_INPUT_USER="请输入 WebDAV 用户名"
+WEBDAV_INPUT_PASS="请输入 WebDAV 密码（输入0清除）"
+WEBDAV_INPUT_URL_HINT="格式示例：https://example.com/remote.php/dav/files/user/ShellCrash/"
+WEBDAV_INPUT_URL_HINT2="确保该目录已创建或脚本可自动创建"
+
+WEBDAV_CONN_TEST="正在测试 WebDAV 连接 ..."
+WEBDAV_CONN_OK="WebDAV 连接测试成功！"
+WEBDAV_CONN_FAIL="WebDAV 连接测试失败，请检查配置！"
+
+WEBDAV_BACKUP_CFG_OK="configs/ 目录备份成功！"
+WEBDAV_BACKUP_CFG_FAIL="configs/ 目录备份失败！"
+WEBDAV_RESTORE_CFG_OK="configs/ 目录恢复成功！"
+WEBDAV_RESTORE_CFG_FAIL="configs/ 目录恢复失败！"
+
+WEBDAV_BACKUP_YAML_OK="config.yaml 上传成功！"
+WEBDAV_BACKUP_YAML_FAIL="config.yaml 上传失败！"
+WEBDAV_RESTORE_YAML_OK="config.yaml 下载恢复成功！"
+WEBDAV_RESTORE_YAML_FAIL="config.yaml 下载恢复失败！"
+
+WEBDAV_AUTO_ON="自动定时备份已开启"
+WEBDAV_AUTO_OFF="自动定时备份已关闭"
+WEBDAV_AUTO_TASK="自动 WebDAV 备份（每6小时）"
+WEBDAV_AUTO_CONFIRM="是否开启自动定时备份？（将创建定时任务，每6小时执行一次）"

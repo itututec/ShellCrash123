@@ -14,5 +14,6 @@
 
 121#$CRASHDIR/task/task.sh reset_firewall#重设透明路由防火墙
 122#sleep 70 && touch /etc/banner && reboot#重启路由设备-慎用
-
-
+131#$CRASHDIR/task/task.sh webdav_auto_backup#自动 WebDAV 备份（configs + config.yaml）
+132#$CRASHDIR/task/task.sh webdav_backup_configs#上传 configs/ 到 WebDAV 远端
+133#$CRASHDIR/task/task.sh webdav_restore_configs#从 WebDAV 下载恢复 configs/

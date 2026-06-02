@@ -145,12 +145,7 @@ settings() {
             ;;
         a)
             BACK_TAR="$CRASHDIR/configs.tar.gz"
-            comp_box "1) $SET_BACKUP" \
-                "2) $SET_RESTORE" \
-                "3) $SET_RESET" \
-                "" \
-                "0) $COMMON_BACK"
-            read -r -p "$COMMON_INPUT> " num
+            comp_box "1) $SET_BACKUP"                 "2) $SET_RESTORE"                 "3) $SET_RESET"                 ""                 "4) [36mWebDAV[0m 远程备份配置"                 "5) [32m上传[0m configs/ 到 WebDAV"                 "6) [33m下载[0m configs/ 从 WebDAV"                 "7) [32m上传[0m config.yaml 到 WebDAV"                 "8) [33m下载[0m config.yaml 从 WebDAV"                 ""                 "0) $COMMON_BACK"            read -r -p "$COMMON_INPUT> " num
             case "$num" in
             "" | 0)
                 continue
@@ -159,9 +154,9 @@ settings() {
                 line_break
                 separator_line "="
                 if tar -zcf "$BACK_TAR" -C "$CRASHDIR/configs/" .; then
-                    content_line "\033[32m$SET_BACKUP_OK $BACK_TAR\033[0m"
+                    content_line "[32m$SET_BACKUP_OK $BACK_TAR[0m"
                 else
-                    content_line "\033[31m$SET_BACKUP_FAIL\033[0m"
+                    content_line "[31m$SET_BACKUP_FAIL[0m"
                 fi
                 separator_line "="
                 sleep 1
@@ -175,9 +170,9 @@ settings() {
                     rm -rf "$CRASHDIR/configs/*"
                     tar -zxf "$BACK_TAR" -C "$CRASHDIR"/configs
                     mv -f "$TMPDIR/configs.tar.gz" "$BACK_TAR"
-                    content_line "\033[32m$SET_RESTORE_OK $BACK_TAR\033[0m"
+                    content_line "[32m$SET_RESTORE_OK $BACK_TAR[0m"
                 else
-                    content_line "\033[31m$SET_BACKUP_MISS\033[0m"
+                    content_line "[31m$SET_BACKUP_MISS[0m"
                 fi
                 ;;
             3)
@@ -186,17 +181,38 @@ settings() {
                 if tar -zcf "$BACK_TAR" -C "$CRASHDIR/configs/" .; then
                     rm -rf "$CRASHDIR/configs"
                     . "$CRASHDIR/init.sh" >/dev/null
-                    content_lin e"\033[32m$SET_RESET_OK\033[0m"
+                    content_lin e"[32m$SET_RESET_OK[0m"
                 else
-                    content_lin e"\033[32m$SET_RESET_FAIL\033[0m"
+                    content_lin e"[32m$SET_RESET_FAIL[0m"
                 fi
+                ;;
+            4)
+                . "$CRASHDIR"/libs/webdav.sh
+                load_lang webdav
+                webdav_settings
+                ;;
+            5)
+                . "$CRASHDIR"/libs/webdav.sh && webdav_backup_configs
+                sleep 1
+                ;;
+            6)
+                . "$CRASHDIR"/libs/webdav.sh && webdav_restore_configs
+                sleep 1
+                ;;
+            7)
+                . "$CRASHDIR"/libs/webdav.sh && webdav_backup_config_file
+                sleep 1
+                ;;
+            8)
+                . "$CRASHDIR"/libs/webdav.sh && webdav_restore_config_file
+                sleep 1
                 ;;
             *)
                 errornum
                 continue
                 ;;
             esac
-            content_line "\033[33m$SET_NEED_RESTART\033[0m"
+            content_line "[33m$SET_NEED_RESTART[0m"
             separator_line "="
             line_break
             sleep 1
@@ -683,6 +699,86 @@ set_ipv6() {
                 common_success
             else
                 common_failed
+            fi
+            ;;
+        *)
+            errornum
+            ;;
+        esac
+    done
+}
+
+# =================================================
+# WebDAV 配置菜单
+# =================================================
+webdav_settings() {
+    while true; do
+        # 显示当前配置状态
+        [ -z "$webdav_url" ] && webdav_url=$WEBDAV_UNSET
+        [ -z "$webdav_user" ] && webdav_user=$WEBDAV_UNSET
+        [ -z "$webdav_pass" ] && webdav_pass=$WEBDAV_UNSET || webdav_pass='******'
+
+        comp_box "[30;47m$WEBDAV_TITLE[0m"
+        content_line "1) $WEBDAV_SERVER_URL [36m$webdav_url[0m"
+        content_line "2) $WEBDAV_USER [36m$webdav_user[0m"
+        content_line "3) $WEBDAV_PASS [36m$webdav_pass[0m"
+        content_line ""
+        btm_box "4) [32m$WEBDAV_MENU_2[0m"             "5) [33m$WEBDAV_MENU_7[0m"             ""             "0) $COMMON_BACK"
+        read -r -p "$COMMON_INPUT> " num
+        case "$num" in
+        "" | 0)
+            break
+            ;;
+        1)
+            line_break
+            separator_line "="
+            content_line "[33m$WEBDAV_INPUT_URL_HINT[0m"
+            content_line "[33m$WEBDAV_INPUT_URL_HINT2[0m"
+            separator_line "="
+            read -r -p "$WEBDAV_INPUT_URL> " url
+            if [ -n "$url" ]; then
+                [ "$url" = 0 ] && url=''
+                webdav_url="$url"
+                setconfig webdav_url "$webdav_url"
+                common_success
+            fi
+            ;;
+        2)
+            line_break
+            read -r -p "$WEBDAV_INPUT_USER> " user
+            if [ -n "$user" ]; then
+                [ "$user" = 0 ] && user=''
+                webdav_user="$user"
+                setconfig webdav_user "$webdav_user"
+                common_success
+            fi
+            ;;
+        3)
+            line_break
+            read -r -p "$WEBDAV_INPUT_PASS> " pass
+            if [ -n "$pass" ]; then
+                [ "$pass" = 0 ] && pass=''
+                webdav_pass="$pass"
+                setconfig webdav_pass "$webdav_pass"
+                common_success
+            fi
+            ;;
+        4)
+            . "$CRASHDIR"/libs/webdav.sh && webdav_test
+            sleep 1
+            ;;
+        5)
+            line_break
+            separator_line "="
+            content_line "$WEBDAV_AUTO_CONFIRM"
+            separator_line "="
+            btm_box "1) [32m$SET_YES[0m"                 "0) [33m$SET_NO_BACK[0m"
+            read -r -p "$COMMON_INPUT> " res
+            if [ "$res" = 1 ]; then
+                # 创建定时任务（每6小时执行一次）
+                . "$CRASHDIR"/libs/set_cron.sh
+                cronset "$WEBDAV_AUTO_TASK" "0 */6 * * * $CRASHDIR/task/task.sh 131 $WEBDAV_AUTO_TASK"
+                msg_alert "[32m$WEBDAV_AUTO_ON[0m"
             fi
             ;;
         *)

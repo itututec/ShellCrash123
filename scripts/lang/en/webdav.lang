@@ -1,0 +1,42 @@
+# =================================================
+# WebDAV Remote Backup & Sync
+# =================================================
+WEBDAV_TITLE="WebDAV Remote Backup & Sync"
+WEBDAV_SERVER_URL="WebDAV Server URL:"
+WEBDAV_USER="Username:"
+WEBDAV_PASS="Password:"
+WEBDAV_ENABLE="Auto Sync:"
+WEBDAV_UNSET="Not set"
+
+WEBDAV_MENU_1="Edit WebDAV Server Configuration"
+WEBDAV_MENU_2="Test WebDAV Connection"
+WEBDAV_MENU_3="Upload configs/ backup to WebDAV"
+WEBDAV_MENU_4="Download and restore configs/ from WebDAV"
+WEBDAV_MENU_5="Upload config.yaml to WebDAV"
+WEBDAV_MENU_6="Download and restore config.yaml from WebDAV"
+WEBDAV_MENU_7="Enable/Disable Scheduled Auto Backup"
+
+WEBDAV_INPUT_URL="Enter WebDAV server URL"
+WEBDAV_INPUT_USER="Enter WebDAV username"
+WEBDAV_INPUT_PASS="Enter WebDAV password (enter 0 to clear)"
+WEBDAV_INPUT_URL_HINT="Format: https://example.com/remote.php/dav/files/user/ShellCrash/"
+WEBDAV_INPUT_URL_HINT2="Make sure the directory exists or can be auto-created"
+
+WEBDAV_CONN_TEST="Testing WebDAV connection ..."
+WEBDAV_CONN_OK="WebDAV connection successful!"
+WEBDAV_CONN_FAIL="WebDAV connection failed. Please check your configuration!"
+
+WEBDAV_BACKUP_CFG_OK="configs/ backup uploaded successfully!"
+WEBDAV_BACKUP_CFG_FAIL="configs/ backup upload failed!"
+WEBDAV_RESTORE_CFG_OK="configs/ restored successfully!"
+WEBDAV_RESTORE_CFG_FAIL="configs/ restore failed!"
+
+WEBDAV_BACKUP_YAML_OK="config.yaml uploaded successfully!"
+WEBDAV_BACKUP_YAML_FAIL="config.yaml upload failed!"
+WEBDAV_RESTORE_YAML_OK="config.yaml downloaded and restored successfully!"
+WEBDAV_RESTORE_YAML_FAIL="config.yaml download failed!"
+
+WEBDAV_AUTO_ON="Scheduled auto backup enabled"
+WEBDAV_AUTO_OFF="Scheduled auto backup disabled"
+WEBDAV_AUTO_TASK="Auto WebDAV backup (every 6h)"
+WEBDAV_AUTO_CONFIRM="Enable scheduled auto backup? (A cron task will be created to run every 6 hours)"

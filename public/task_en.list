@@ -14,6 +14,6 @@
 
 121#$CRASHDIR/task/task.sh reset_firewall#Reset transparent routing firewall
 122#sleep 70 && touch /etc/banner && reboot#Reboot router device – use with caution
-
-
-
+131#$CRASHDIR/task/task.sh webdav_auto_backup#Auto WebDAV backup (configs + config.yaml)
+132#$CRASHDIR/task/task.sh webdav_backup_configs#Upload configs/ to WebDAV
+133#$CRASHDIR/task/task.sh webdav_restore_configs#Download and restore configs/ from WebDAV

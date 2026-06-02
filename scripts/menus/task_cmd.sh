@@ -8,6 +8,7 @@
 . "$CRASHDIR"/libs/check_cmd.sh
 . "$CRASHDIR"/libs/set_config.sh
 . "$CRASHDIR"/libs/web_get_bin.sh
+. "$CRASHDIR"/libs/webdav.sh
 . "$CRASHDIR"/libs/logger.sh
 . "$CRASHDIR"/libs/i18n.sh
 [ -z "$TASKCFGDIR" ] && TASKCFGDIR="$CRASHDIR"/configs/task
